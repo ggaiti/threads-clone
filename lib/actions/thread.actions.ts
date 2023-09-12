@@ -80,7 +80,7 @@ export async function fetchThreadById(id: string) {
         populate: [
           {
             path: "author",
-            mdoel: User,
+            model: User,
             select: "_id id name parentId image",
           },
           {
@@ -95,6 +95,7 @@ export async function fetchThreadById(id: string) {
         ],
       })
       .exec();
+
     return thread;
   } catch (error: any) {
     throw new Error(`Error fetching thread: ${error.message}`);
