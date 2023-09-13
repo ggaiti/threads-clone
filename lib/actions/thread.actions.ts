@@ -48,9 +48,12 @@ export async function fetchPosts(pageNumber = 1, pageSize = 20) {
     .limit(pageSize)
     .populate({ path: "author", model: User })
     .populate({
-      path: "author",
-      model: User,
-      select: "_id name parentId image",
+      path: "children", // Populate the children field
+      populate: {
+        path: "author",
+        model: User,
+        select: "_id name parentId image",
+      },
     });
 
   const totalPostCount = await Thread.countDocuments({
